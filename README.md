@@ -1,4 +1,4 @@
-**This firmware is maintained by TH3D. The goal is an easy to use firmware for 3D printers that we have added support for.**
+**This firmware fork is not maintained by TH3D. The firmware upon which it is based, is.  The goal is an easy to use firmware for 3D printers that we have added support for.**
 
 ----------
 

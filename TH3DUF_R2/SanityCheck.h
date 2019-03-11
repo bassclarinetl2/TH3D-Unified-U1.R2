@@ -40,8 +40,20 @@
   #error "Only use one type of EZOut sensor at a time. Please read the EZOut installation guide for details."
 #endif
 
+#if ENABLED(EZOUTV2_ENABLE) && ENABLED(ENDER4_FIL)
+  #error "Only use one type of filament sensor at a time on the Ender 4. Please enable the one you have and disable the other."
+#endif
+
 #if ENABLED(TH3D_HOTEND_THERMISTOR) && ENABLED(V6_HOTEND)
   #error "Only select one type of hotend thermistor setting."
+#endif
+
+#if ENABLED(BLTOUCH) && (ENABLED(EZOUT_ENABLE) || ENABLED(EZOUTV2_ENABLE)) && ENABLED(SLIM_1284P)
+  #error "You cannot use the EZOut and BLTouch at the same time due to limitations on your board."
+#endif
+
+#if ENABLED(BLTOUCH) && ENABLED(POWER_LOSS_RECOVERY) && ENABLED(SLIM_1284P)
+  #error "Due to space limitations the BLTouch cannot be used with Power Loss Recovery on your printer. Disable Power Loss Recovery and re-flash."
 #endif
 
 /**

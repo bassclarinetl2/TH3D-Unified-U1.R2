@@ -270,7 +270,7 @@
 //===========================================================================
 // Creality Ender 3 Options - Select 'Sanguino 1284p' from Tools > Board
 //===========================================================================
-//#define ENDER3
+#define ENDER3
 
 // If you are using our EZOut V1/V2 (connected to LCD header) filament sensor kit please follow the install guide
 // and then uncomment the #define EZOUT_ENABLE line below.
@@ -278,7 +278,7 @@
 //#define EZOUT_ENABLE
 
 // EZABL Probe Mounts (Ender 3 uses the same mounts as CR-10)
-//#define CR10_OEM
+#define CR10_OEM
 //#define CR10_VOLCANO
 //#define CR10_V6HEAVYDUTY
 //#define TM3DAERO

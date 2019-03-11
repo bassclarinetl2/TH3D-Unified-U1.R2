@@ -1040,7 +1040,7 @@
 
 //CR-10 and Ender 3 Model Settings
 #if ENABLED(CR10) || ENABLED(CR10_MINI) || ENABLED(CR10_S4) || ENABLED(CR10_S5) || ENABLED(ENDER3) || ENABLED(ENDER5)
-  #define SLIM_1284P
+ // #define SLIM_1284P
   #define BAUDRATE 115200
 
   #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
@@ -1088,23 +1088,29 @@
   #define DEFAULT_ZJERK                  0.3
   #define DEFAULT_EJERK                  5.0
   
-  #define INVERT_X_DIR true
-  #define INVERT_Y_DIR true
+  //#define INVERT_X_DIR true
+ // #define INVERT_Y_DIR true
+  #define INVERT_X_DIR false
+  #define INVERT_Y_DIR false
   
   #if ENABLED(ENDER5)
     #define INVERT_Z_DIR true
   #else
-    #define INVERT_Z_DIR false
+//    #define INVERT_Z_DIR false
+  #define INVERT_Z_DIR true
   #endif
   
+
   #if ENABLED(TITAN_EXTRUDER)
     #define INVERT_E0_DIR false
   #else
-    #define INVERT_E0_DIR true
+    //#define INVERT_E0_DIR true
+    #define INVERT_E0_DIR false
   #endif
     
   #ifndef MOTHERBOARD
-    #define MOTHERBOARD BOARD_MELZI_CREALITY
+    //#define MOTHERBOARD BOARD_MELZI_CREALITY
+    #define MOTHERBOARD BOARD_MKS_GEN_L
   #endif
 
   #if ENABLED(CR10)

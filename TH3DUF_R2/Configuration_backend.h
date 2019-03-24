@@ -1040,7 +1040,7 @@
 
 //CR-10 and Ender 3 Model Settings
 #if ENABLED(CR10) || ENABLED(CR10_MINI) || ENABLED(CR10_S4) || ENABLED(CR10_S5) || ENABLED(ENDER3) || ENABLED(ENDER5)
- // #define SLIM_1284P
+  //#define SLIM_1284P
   #define BAUDRATE 115200
 
   #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
@@ -1089,22 +1089,21 @@
   #define DEFAULT_EJERK                  5.0
   
   //#define INVERT_X_DIR true
- // #define INVERT_Y_DIR true
   #define INVERT_X_DIR false
+  //#define INVERT_Y_DIR true
   #define INVERT_Y_DIR false
   
   #if ENABLED(ENDER5)
     #define INVERT_Z_DIR true
   #else
-//    #define INVERT_Z_DIR false
-  #define INVERT_Z_DIR true
+    //#define INVERT_Z_DIR false
+    #define INVERT_Z_DIR true
   #endif
   
-
   #if ENABLED(TITAN_EXTRUDER)
     #define INVERT_E0_DIR false
   #else
-    //#define INVERT_E0_DIR true
+   // #define INVERT_E0_DIR true
     #define INVERT_E0_DIR false
   #endif
     
@@ -1836,6 +1835,8 @@
 #if DISABLED(TH3DINHOUSEMACHINE)
   #if ENABLED(V6_HOTEND)
     #define TEMP_SENSOR_0 5
+  #elif ENABLED(KNOWN_HOTEND_THERMISTOR)
+    #define TEMP_SENSOR_0 KNOWN_HOTEND_THERMISTOR_VALUE
   #elif ENABLED(TH3D_HOTEND_THERMISTOR) || ENABLED(TH3D_EZ300)
     #define TEMP_SENSOR_0 1
   #elif ENABLED(WANHAO_D6)
@@ -1865,6 +1866,8 @@
 #if DISABLED(TH3DINHOUSEMACHINE)
   #if ENABLED(AC_BED) || ENABLED(WANHAO_I3MINI)
     #define TEMP_SENSOR_BED 0
+  #elif ENABLED(KNOWN_BED_THERMISTOR)
+    #define TEMP_SENSOR_BED KNOWN_BED_THERMISTOR_VALUE
   #elif ENABLED(TH3D_BED_THERMISTOR) || ENABLED(ALFAWISE_U10) || ENABLED(FT5) || ENABLED(TH3D_EZ300)
     #define TEMP_SENSOR_BED 1
   #elif ENABLED(TAZ5)

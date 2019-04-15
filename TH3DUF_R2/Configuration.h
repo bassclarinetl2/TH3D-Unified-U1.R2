@@ -149,6 +149,18 @@
 //#define CUSTOM_PROBE
 
 //===========================================================================
+// ***********************   COPYMASTER PRINTERS    *************************
+//===========================================================================
+
+//===========================================================================
+// Copymaster 3D 300 Options - Select 'Arduino Mega 2560' from Tools > Board
+//===========================================================================
+//#define COPYMASTER3D_300
+
+// EZABL Probe Mounts
+//#define CUSTOM_PROBE
+
+//===========================================================================
 // *************************   CREALITY PRINTERS    *************************
 //===========================================================================
 
@@ -219,6 +231,10 @@
 // If you are using a dual hotend with dual nozzles uncomment the below line
 //#define DUAL_HOTEND_DUAL_NOZZLES
 
+// If you are using a 2nd EZOut V2 (connects to Y+ connector) filament sensor kit please follow the install guide
+// and then uncomment the #define EZOUTV2_DUAL_ENABLE line below. Do NOT ever connect our filament sensor without the supplied adapter board.
+//#define EZOUTV2_DUAL_ENABLE
+
 //===========================================================================
 // Creality CR-20 Options - Select 'Arduino Mega 2560' from Tools > Board
 //===========================================================================
@@ -244,6 +260,10 @@
 
 // If you are using a dual hotend with dual nozzles uncomment the below line
 //#define DUAL_HOTEND_DUAL_NOZZLES
+
+// If you are using a 2nd EZOut V2 (connects to Y+ connector) filament sensor kit please follow the install guide
+// and then uncomment the #define EZOUTV2_DUAL_ENABLE line below. Do NOT ever connect our filament sensor without the supplied adapter board.
+//#define EZOUTV2_DUAL_ENABLE
 
 //===========================================================================
 // Creality Ender 2 Options - Select 'Sanguino 1284p' from Tools > Board
@@ -307,6 +327,10 @@
 // If you are using a dual hotend with dual nozzles uncomment the below line
 //#define DUAL_HOTEND_DUAL_NOZZLES
 
+// If you are using a 2nd EZOut V2 (connects to Y+ connector) filament sensor kit please follow the install guide
+// and then uncomment the #define EZOUTV2_DUAL_ENABLE line below. Do NOT ever connect our filament sensor without the supplied adapter board.
+//#define EZOUTV2_DUAL_ENABLE
+
 //===========================================================================
 // Creality Ender 4 Options - Select 'Arduino Mega 2560' from Tools > Board
 //===========================================================================
@@ -343,6 +367,31 @@
 //#define TM3DAERO_EXTENDED
 //#define PETSFANG  //This is the RIGHT mounted version - if using the left mount please use the CUSTOM_PROBE option.
 //#define CUSTOM_PROBE
+
+//=================================================================================================
+// README - THE BELOW SETTINGS ARE ONLY FOR USING THE CR-10S DUAL BOARD WITH THE ENDER 5
+// DO NOT UNCOMMENT THE ABOVE #define ENDER5 LINE IF USING THE DUAL BOARD
+// Select 'Arduino Mega 2560' from Tools > Board - NOT Sanguino
+//
+// To use the Ender 5 LCD with the CR-10S dual board board connect the LCD cable to EXP1 on the 
+// CR-10S board but rotate it 180 degrees. The LCD end of the cable goes to EXP3 on the Ender 5 LCD.
+// You will have to force it into the EXP1 but it will fit and work.
+// 
+// EZABL and EZOut support are still supported just use the lines above this comment section.
+//=================================================================================================
+//#define ENDER5_DUALBOARD
+
+// Dual Extruder Board Options - The below options are for use with the TH3D CR-10S Board with dual extruder support.
+
+// If you are using a single hotend with the 2 into 1 adapter OR mixing nozzle uncomment the below line
+//#define DUAL_EXTRUDER_SINGLE_HOTEND
+
+// If you are using a dual hotend with dual nozzles uncomment the below line
+//#define DUAL_HOTEND_DUAL_NOZZLES
+
+// If you are using a 2nd EZOut V2 (connects to Y+ connector) filament sensor kit please follow the install guide
+// and then uncomment the #define EZOUTV2_DUAL_ENABLE line below. Do NOT ever connect our filament sensor without the supplied adapter board.
+//#define EZOUTV2_DUAL_ENABLE
 
 //===========================================================================
 // *************************  FOLGERTECH PRINTERS   *************************
@@ -487,6 +536,73 @@
 //#define WANHAO_D6_OEM
 //#define CUSTOM_PROBE
 
+//===========================================================================
+// ***********************  MKS Gen L Based Printer   ***********************
+// *************  Select 'Arduino Mega 2560' from Tools > Board *************
+// **** Please refer to the TH3D MKS Gen L Documentation Guide for Setup ****
+// **** Endstop/Motors: changing from 0 to 1 inverts the logic/direction ****
+// ********** TH3D MKS Gen L Documentation Coming end of April 2019 *********
+//===========================================================================
+
+//#define MKS_PRINTER
+
+// Build Area Size Settings
+#define MKS_X_SIZE 300
+#define MKS_Y_SIZE 300
+#define MKS_Z_SIZE 300
+
+// Endstop Logic Settings
+#define MKS_X_ENDSTOP 0
+#define MKS_Y_ENDSTOP 0
+#define MKS_Z_ENDSTOP 0
+
+// Steps per MM Settings
+#define MKS_X_STEPS 80
+#define MKS_Y_STEPS 80
+#define MKS_Z_STEPS 400
+#define MKS_E0_STEPS 95
+#define MKS_E1_STEPS 95
+
+// Motor Direction Settings
+#define MKS_X_DIRECTION 0
+#define MKS_Y_DIRECTION 0
+#define MKS_Z_DIRECTION 0
+#define MKS_E0_DIRECTION 0
+#define MKS_E1_DIRECTION 0
+
+// Stepper Driver Settings
+#define MKS_X_DRIVER TMC2208_STANDALONE
+#define MKS_Y_DRIVER TMC2208_STANDALONE
+#define MKS_Z_DRIVER A4988
+#define MKS_E0_DRIVER A4988
+#define MKS_E1_DRIVER A4988
+
+// Thermistor Settings (uses standard Marlin Thermistor numbers)
+#define MKS_E_THERMISTOR 1
+#define MKS_BED_THERMISTOR 1
+
+// EZOut V2 Filament Sensor Settings
+//#define MKS_EZOUT_V2_X_PLUS
+//#define MKS_EZOUT_V2_Y_PLUS
+
+// EZABL & ABL Probe Settings
+// If you are using a pre-supported mount that is available already then uncomment it above in that printer section.
+// For example if you are using CR-10 with the OEM mount then scroll up and uncomment the #define CR10_OEM line like you would normally.
+// If you are using a probe mount that is not supported then use the CUSTOM_PROBE option and enter in your probe offsets below.
+//#define CUSTOM_PROBE
+
+// If you are using a single hotend with the 2 into 1 adapter OR mixing nozzle uncomment the below line
+//#define DUAL_EXTRUDER_SINGLE_HOTEND
+
+// If you are using a dual hotend with dual nozzles uncomment the below line
+//#define DUAL_HOTEND_DUAL_NOZZLES
+
+// While recommend the 12864 LCD we carry as it has a SD slot you can use a CR-10/Ender 3/Ender 5 LCD connected to EXP1 (rotate 180 degrees instead of aligning the pin)
+// Uncomment the below line to use the single cable Creality (Melzi) LCD instead of a standard 12864 LCD
+//#define CR10_STOCKDISPLAY
+
+// If your lcd knob moves the wrong direction uncomment the below line to reverse it
+//#define MKS_KNOB_REVERSE
 
 //===========================================================================
 // *************************  END PRINTER SECTION   *************************
@@ -524,6 +640,9 @@
 
 // This will extrapolate the implied tilt of the bed outside of the probe area. Do not comment out unless directed by support.
 #define EZABL_OUTSIDE_GRID_COMPENSATION
+
+// Does your machine make weird noises/vibrations when it is probing the mesh? Enable this to slow down the speed between probe points.
+//#define SLOWER_PROBE_MOVES
 
 //================================================================================
 // IF YOU HAVE A CUSTOM PROBE MOUNT OR ONE THAT IS NOT PRE-SUPPORTED UNCOMMENT THE
@@ -594,6 +713,14 @@
 // If you are using a Keenovo with SSR and the Keenovo temperature sensor uncomment the below line.
 //#define KEENOVO_TEMPSENSOR
 
+// If you are using a known hotend thermistor value uncomment the below 2 lines and enter the thermistor number replacing the X after the #define KNOWN_HOTEND_THERMISTOR_VALUE
+//#define KNOWN_HOTEND_THERMISTOR
+//#define KNOWN_HOTEND_THERMISTOR_VALUE X
+
+// If you are using a known bed thermistor value uncomment the below 2 lines and enter the thermistor number replacing the X after the #define KNOWN_BED_THERMISTOR_VALUE
+//#define KNOWN_BED_THERMISTOR
+//#define KNOWN_BED_THERMISTOR_VALUE X
+
 // BED SETTINGS ------------------------------------
 
 // If you want PID tuning on your bed you can enable the below line. But PID on a bed is not typically needed. By default BED PID is disabled.
@@ -655,9 +782,11 @@
 // and then enter your probe offsets in the CUSTOM_PROBE section above. The Pin 27 boards on eBay are clones of our original EZOut. If you want to 
 // support the people that originally came up with the board you can get our EZOut breakout board here: http://EZOut.TH3DStudio.com
 // Sales from our shop allow us to allocate time for community firmware development at no charge to you. <3
+// If you have a V3 BL Touch also uncomment the BLTOUCH_V3 line to fix issues with the new V3 probe.
 //
 //#define BLTOUCH
-// Here is where you set your servo pin. EZOut Servo Pin Numbers: Others - 27, Ender 2 - 29. For 2560 boards look for the pin you connected the servo wire to and enter below.
+//#define BLTOUCH_V3
+// Here is where you set your servo pin. EZOut Servo Pin Numbers: Ender3/5/CR-10 - 27, Ender 2 - 29. For 2560 boards look for the pin you connected the servo wire to and enter below.
 //#define SERVO0_PIN 27
 //
 // NOTE: On 1284p boards due to space limitations and the large amount of code the BLTouch requires for the LCD Menus
@@ -678,6 +807,7 @@
 
 // MOTION SETTINGS ---------------------------------
 // If you do not like the new Junction Deviation (Jerk) and/or S-Curve Acceleration then you can uncomment the below lines to disable each feature.
+// Due to Anet board restrictions this is always disabled on those machines.
 //#define JUNCTION_DEVIATION_DISABLE
 //#define S_CURVE_ACCELERATION_DISABLE
 
@@ -700,6 +830,6 @@
 
 #include "Configuration_backend.h"
 
-#define UNIFIED_VERSION "TH3D U1.R2.9b"
+#define UNIFIED_VERSION "TH3D U1.R2.11"
 
 #endif // CONFIGURATION_H

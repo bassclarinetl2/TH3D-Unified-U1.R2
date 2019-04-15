@@ -9,18 +9,20 @@
 #include "Configuration_th3d.h"
 
 #if DISABLED(TH3DINHOUSEMACHINE)
-  #if DISABLED(CUSTOM_DRIVERS)
-    #define X_DRIVER_TYPE  A4988
-    #define Y_DRIVER_TYPE  A4988
-    #define Z_DRIVER_TYPE  A4988
-    #define X2_DRIVER_TYPE A4988
-    #define Y2_DRIVER_TYPE A4988
-    #define Z2_DRIVER_TYPE A4988
-    #define E0_DRIVER_TYPE A4988
-    #define E1_DRIVER_TYPE A4988
-    #define E2_DRIVER_TYPE A4988
-    #define E3_DRIVER_TYPE A4988
-    #define E4_DRIVER_TYPE A4988
+  #if DISABLED(MKS_PRINTER)
+    #if DISABLED(CUSTOM_DRIVERS)
+      #define X_DRIVER_TYPE  A4988
+      #define Y_DRIVER_TYPE  A4988
+      #define Z_DRIVER_TYPE  A4988
+      #define X2_DRIVER_TYPE A4988
+      #define Y2_DRIVER_TYPE A4988
+      #define Z2_DRIVER_TYPE A4988
+      #define E0_DRIVER_TYPE A4988
+      #define E1_DRIVER_TYPE A4988
+      #define E2_DRIVER_TYPE A4988
+      #define E3_DRIVER_TYPE A4988
+      #define E4_DRIVER_TYPE A4988
+    #endif
   #endif
 #endif
 
@@ -155,6 +157,231 @@
   #define EZABL_ENABLE
   #define DISABLE_BOOT
 #endif
+
+//Copymaster 3D 300 Settings
+#if ENABLED(COPYMASTER3D_300)
+  #ifndef MOTHERBOARD
+    #define MOTHERBOARD BOARD_COPYMASTER300
+  #endif
+
+  #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+  #define BAUDRATE 115200
+
+  #define X_MIN_ENDSTOP_INVERTING false
+  #define Y_MIN_ENDSTOP_INVERTING false
+  #define Z_MIN_ENDSTOP_INVERTING false
+  #define X_MAX_ENDSTOP_INVERTING false
+  #define Y_MAX_ENDSTOP_INVERTING false
+  #define Z_MAX_ENDSTOP_INVERTING false
+  #define Z_MIN_PROBE_ENDSTOP_INVERTING false
+  
+  #if ENABLED(TITAN_EXTRUDER)
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 94.14, 94.14, 400, TITAN_EXTRUDER_STEPS }
+  #else
+    #if ENABLED(CUSTOM_ESTEPS)
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 94.14, 94.14, 400, CUSTOM_ESTEPS_VALUE }
+    #else
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 94.14, 94.14, 400, 96.27 }
+    #endif
+  #endif
+  
+  #define DEFAULT_MAX_FEEDRATE          { 100, 100, 15, 20 }
+  #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 4000 }
+
+  #define DEFAULT_ACCELERATION          500    
+  #define DEFAULT_RETRACT_ACCELERATION  500   
+  #define DEFAULT_TRAVEL_ACCELERATION   500    
+  
+  #define DEFAULT_XJERK                 10.0
+  #define DEFAULT_YJERK                 10.0
+  #define DEFAULT_ZJERK                  0.4
+  #define DEFAULT_EJERK                  5.0
+  
+  #define INVERT_X_DIR false
+  #define INVERT_Y_DIR false
+  #define INVERT_Z_DIR true
+  
+  #if ENABLED(TITAN_EXTRUDER)
+    #define INVERT_E0_DIR false
+  #else
+    #define INVERT_E0_DIR true
+  #endif
+
+  #define X_BED_SIZE 310
+  #define Y_BED_SIZE 310
+  #define Z_MAX_POS 400
+  
+  #define REVERSE_MENU_DIRECTION
+  
+  #if ENABLED(HOME_ADJUST)
+    #define X_MIN_POS X_HOME_LOCATION
+    #define Y_MIN_POS Y_HOME_LOCATION
+  #else
+    #define X_MIN_POS 0
+    #define Y_MIN_POS 0
+  #endif
+  
+  #define ENCODER_PULSES_PER_STEP 1
+  #define ENCODER_STEPS_PER_MENU_ITEM 5
+  
+  #define PRINTER_ENABLED_CHECK
+#endif //end copymaster 3d 300
+
+//MKS Gen L Settings
+#if ENABLED(MKS_PRINTER)
+
+  #ifndef MOTHERBOARD
+    #define MOTHERBOARD BOARD_MKS_GEN_L
+  #endif
+  #define BAUDRATE 250000
+  
+  #if DISABLED(CR10_STOCKDISPLAY)
+    #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+  #endif
+  
+  #define ENCODER_PULSES_PER_STEP 4
+  #define ENCODER_STEPS_PER_MENU_ITEM 1
+  
+  #if ENABLED(MKS_KNOB_REVERSE)
+    //#define REVERSE_ENCODER_DIRECTION
+  #elif ENABLED(CR10_STOCKDISPLAY)
+    //#define REVERSE_ENCODER_DIRECTION
+  #else
+    #define REVERSE_ENCODER_DIRECTION
+  #endif
+
+  #if ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND) || ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND)
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { MKS_X_STEPS, MKS_Y_STEPS, MKS_Z_STEPS, MKS_E0_STEPS, MKS_E1_STEPS }
+  #else
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { MKS_X_STEPS, MKS_Y_STEPS, MKS_Z_STEPS, MKS_E0_STEPS, }
+  #endif
+
+  #define X_BED_SIZE MKS_X_SIZE
+  #define Y_BED_SIZE MKS_Y_SIZE
+  #define X_MIN_POS 0
+  #define Y_MIN_POS 0
+  #define Z_MIN_POS 0
+  #define Z_MAX_POS MKS_Z_SIZE
+
+  #if MKS_X_ENDSTOP == 0
+    #define X_MIN_ENDSTOP_INVERTING false
+  #else
+    #define X_MIN_ENDSTOP_INVERTING true
+  #endif
+  
+  #define KNOWN_HOTEND_THERMISTOR
+  #define KNOWN_HOTEND_THERMISTOR_VALUE MKS_E_THERMISTOR
+  
+  #define KNOWN_BED_THERMISTOR
+  #define KNOWN_BED_THERMISTOR_VALUE MKS_BED_THERMISTOR
+  
+  #if MKS_Y_ENDSTOP == 0
+    #define Y_MIN_ENDSTOP_INVERTING false
+  #else
+    #define Y_MIN_ENDSTOP_INVERTING true
+  #endif
+  
+  #if MKS_Z_ENDSTOP == 0
+    #define Z_MIN_ENDSTOP_INVERTING false
+    #define Z_MIN_PROBE_ENDSTOP_INVERTING false
+  #else
+    #define Z_MIN_ENDSTOP_INVERTING true
+    #define Z_MIN_PROBE_ENDSTOP_INVERTING true
+  #endif
+
+  #define X_MAX_ENDSTOP_INVERTING false
+  #define Y_MAX_ENDSTOP_INVERTING false
+  #define Z_MAX_ENDSTOP_INVERTING false
+  
+  #if MKS_X_DIRECTION == 0
+    #define INVERT_X_DIR false
+  #else
+    #define INVERT_X_DIR true
+  #endif
+  
+  #if MKS_Y_DIRECTION == 0
+    #define INVERT_Y_DIR false
+  #else
+    #define INVERT_Y_DIR true
+  #endif
+  
+  #if MKS_Z_DIRECTION == 0
+    #define INVERT_Z_DIR false
+  #else
+    #define INVERT_Z_DIR true
+  #endif
+  
+  #if MKS_Z_DIRECTION == 0
+    #define INVERT_Z_DIR false
+  #else
+    #define INVERT_Z_DIR true
+  #endif
+  
+  #if MKS_E0_DIRECTION == 0
+    #define INVERT_E0_DIR false
+  #else
+    #define INVERT_E0_DIR true
+  #endif
+  
+  #if MKS_E1_DIRECTION == 0
+    #define INVERT_E1_DIR false
+  #else
+    #define INVERT_E1_DIR true
+  #endif
+  
+  #if ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND) || ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND)
+    #define DUAL_EXTRUDERS
+    #define DISTINCT_E_FACTORS
+  #endif
+
+  #define X_DRIVER_TYPE  MKS_X_DRIVER
+  #define Y_DRIVER_TYPE  MKS_Y_DRIVER
+  #define Z_DRIVER_TYPE  MKS_Z_DRIVER
+  #define X2_DRIVER_TYPE A4988
+  #define Y2_DRIVER_TYPE A4988
+  #define Z2_DRIVER_TYPE A4988
+  #define E0_DRIVER_TYPE MKS_E0_DRIVER
+  #define E1_DRIVER_TYPE MKS_E1_DRIVER
+  #define E2_DRIVER_TYPE A4988
+  #define E3_DRIVER_TYPE A4988
+  #define E4_DRIVER_TYPE A4988
+  
+  #define DEFAULT_MAX_FEEDRATE          { 500, 500, 15, 50 }
+  #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 5000 }
+
+  #define DEFAULT_ACCELERATION          500
+  #define DEFAULT_RETRACT_ACCELERATION  1000   
+  #define DEFAULT_TRAVEL_ACCELERATION   500    
+  
+  // Not used when using junction deviation which is on by default. Only here for reference.
+  #define DEFAULT_XJERK                 10.0
+  #define DEFAULT_YJERK                 10.0
+  #define DEFAULT_ZJERK                  0.4
+  #define DEFAULT_EJERK                  5.0
+
+  #if ENABLED(MKS_EZOUT_V2_X_PLUS)
+    #define EZOUTV2_ENABLE
+  #endif
+  
+  #if ENABLED(MKS_EZOUT_V2_Y_PLUS)
+    #define EZOUTV2_DUAL_ENABLE
+  #endif
+  
+  //dual extrusion options
+  //single hotend y adapter
+  #if ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND)
+    #define SINGLENOZZLE
+  #endif
+
+  //dual hotend dual nozzles
+  #if ENABLED(DUAL_HOTEND_DUAL_NOZZLES)
+    #define HOTEND_OFFSET_X {0.0, DUAL_HOTEND_X_DISTANCE} // (in mm) for each extruder, offset of the hotend on the X axis
+    #define HOTEND_OFFSET_Y {0.0, 0.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
+  #endif
+  
+  #define PRINTER_ENABLED_CHECK
+
+#endif //end mks gen l
 
 //Ender 4 Settings
 #if ENABLED(ENDER4)
@@ -527,7 +754,8 @@
 
   #define NEW_JERK_CONTROL
   #define NEW_ACCELERATION_CONTROL
-  #define LINEAR_ADVANCE
+  #define EZABL_PROBE_EDGE 45
+  //#define LINEAR_ADVANCE
   #define EZABL_FASTPROBE
   #define BABYSTEP_OFFSET
   #define EZOUTV2_ENABLE
@@ -559,7 +787,7 @@
   #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 200, 10000 }
 
   #define DEFAULT_ACCELERATION          800    
-  #define DEFAULT_RETRACT_ACCELERATION  1500   
+  #define DEFAULT_RETRACT_ACCELERATION  1000   
   #define DEFAULT_TRAVEL_ACCELERATION   800    
   
   #define DEFAULT_XJERK                 10.0
@@ -956,7 +1184,7 @@
 
 //Wanhao i3 Model Settings
 #if ENABLED(WANHAO_I3)
-	#define SLIM_1284P
+  #define SLIM_1284P
   #define BAUDRATE 115200
   
   #if ENABLED(EZOUTV2_ENABLE)
@@ -1159,14 +1387,14 @@
 #endif //end CR-10
 
 //CR-10S Model Settings
-#if ENABLED(CR10S) || ENABLED(CR10S_MINI) || ENABLED(CR10S_S4) || ENABLED(CR10S_S5) || ENABLED(ENDER3_DUALBOARD) || ENABLED(CR20)
+#if ENABLED(CR10S) || ENABLED(CR10S_MINI) || ENABLED(CR10S_S4) || ENABLED(CR10S_S5) || ENABLED(ENDER3_DUALBOARD) || ENABLED(CR20) || ENABLED(ENDER5_DUALBOARD)
   #define BAUDRATE 115200
   
   #if ENABLED(TOUCH_LCD_FIX)
     #define CR10S_NOFILAMENTSENSOR
   #endif
 
-  #if ENABLED(CR10LCD_CR10S) || ENABLED(ENDER3_DUALBOARD)
+  #if ENABLED(CR10LCD_CR10S) || ENABLED(ENDER3_DUALBOARD) || ENABLED(ENDER5_DUALBOARD)
     #define CR10_STOCKDISPLAY
   #elif ENABLED(CR20)
     #define MINIPANEL
@@ -1211,7 +1439,13 @@
   
   #define INVERT_X_DIR false
   #define INVERT_Y_DIR false
-  #define INVERT_Z_DIR true
+  
+  #if ENABLED(ENDER5_DUALBOARD)
+    #define INVERT_Z_DIR false
+  #else
+    #define INVERT_Z_DIR true
+  #endif
+  
   #if ENABLED(TITAN_EXTRUDER)
     #define INVERT_E0_DIR true
   #else
@@ -1256,6 +1490,12 @@
     #define Z_MAX_POS 250
   #endif
   
+  #if ENABLED(ENDER5_DUALBOARD)
+    #define X_BED_SIZE 220
+    #define Y_BED_SIZE 220
+    #define Z_MAX_POS 300
+  #endif
+  
   #if ENABLED(CR20)
     #define X_BED_SIZE 220
     #define Y_BED_SIZE 220
@@ -1268,6 +1508,7 @@
   #if ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND)
     #define CR10SDUALEBOARD
     #define SINGLENOZZLE
+    #define DUAL_EXTRUDERS
     
     #if ENABLED(TITAN_EXTRUDER)
       #define INVERT_E1_DIR true
@@ -1280,6 +1521,7 @@
   //dual hotend dual nozzles
   #if ENABLED(DUAL_HOTEND_DUAL_NOZZLES)
     #define CR10SDUALEBOARD
+    #define DUAL_EXTRUDERS
     
     #if ENABLED(TITAN_EXTRUDER)
       #define INVERT_E1_DIR true
@@ -1328,10 +1570,10 @@
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, TITAN_EXTRUDER_STEPS }
   #else
     #if ENABLED(CUSTOM_ESTEPS)
-	    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, CUSTOM_ESTEPS_VALUE }
-	  #else
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, CUSTOM_ESTEPS_VALUE }
+    #else
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95 }
-	  #endif
+    #endif
   #endif
   #define DEFAULT_MAX_FEEDRATE          { 500, 500, 15, 50 }
   #define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 5000 }
@@ -1392,11 +1634,11 @@
   #if ENABLED(TITAN_EXTRUDER)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, TITAN_EXTRUDER_STEPS }
   #else
-	  #if ENABLED(CUSTOM_ESTEPS)
-	    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, CUSTOM_ESTEPS_VALUE }
-	  #else
+    #if ENABLED(CUSTOM_ESTEPS)
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, CUSTOM_ESTEPS_VALUE }
+    #else
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 400 }
-	  #endif
+    #endif
   #endif
   #define DEFAULT_MAX_FEEDRATE          { 500, 500, 15, 50 }
   #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 5000 }
@@ -1455,7 +1697,7 @@
   #define Z_MIN_PROBE_ENDSTOP_INVERTING true
   
   #if ENABLED(CUSTOM_ESTEPS)
-	  #define DEFAULT_AXIS_STEPS_PER_UNIT {100.5,100.5,1600,CUSTOM_ESTEPS_VALUE}
+    #define DEFAULT_AXIS_STEPS_PER_UNIT {100.5,100.5,1600,CUSTOM_ESTEPS_VALUE}
   #else
     #define DEFAULT_AXIS_STEPS_PER_UNIT {100.5,100.5,1600,830}
   #endif
@@ -1500,6 +1742,10 @@
 //ANET Model Settings
 #if ENABLED(ANET_A2) || ENABLED(ANET_A6) || ENABLED(ANET_A8) || ENABLED(ANET_E10) || ENABLED(ANET_E12)
   #define SLIM_1284P
+  
+  #define JUNCTION_DEVIATION_DISABLE
+  #define S_CURVE_ACCELERATION_DISABLE
+  
   #ifndef MOTHERBOARD
     #define MOTHERBOARD BOARD_ANET_10 
   #endif
@@ -1517,23 +1763,23 @@
   #if ENABLED(ANET_A2) || ENABLED(ANET_A6) || ENABLED(ANET_A8)
     #if ENABLED(TITAN_EXTRUDER)
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, TITAN_EXTRUDER_STEPS }
-	  #else
-	    #if ENABLED(CUSTOM_ESTEPS)
-		    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, CUSTOM_ESTEPS_VALUE }
-	    #else
+    #else
+      #if ENABLED(CUSTOM_ESTEPS)
+        #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, CUSTOM_ESTEPS_VALUE }
+      #else
         #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 95 }
       #endif
-	  #endif
-	#else
-	  #if ENABLED(TITAN_EXTRUDER)
+    #endif
+  #else
+    #if ENABLED(TITAN_EXTRUDER)
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, TITAN_EXTRUDER_STEPS }
-	  #else
-	    #if ENABLED(CUSTOM_ESTEPS)
-		    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, CUSTOM_ESTEPS_VALUE }
-	    #else
+    #else
+      #if ENABLED(CUSTOM_ESTEPS)
+        #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, CUSTOM_ESTEPS_VALUE }
+      #else
         #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95 }
-	    #endif
-	  #endif
+      #endif
+    #endif
   #endif
   #define DEFAULT_MAX_FEEDRATE          { 500, 500, 15, 50 }
   #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 5000 }
@@ -1815,7 +2061,7 @@
 
 #define SERIAL_PORT 0
 
-#if ENABLED(CR10SDUALEBOARD) || ENABLED(TIM_AM8)
+#if ENABLED(CR10SDUALEBOARD) || ENABLED(TIM_AM8) || (ENABLED(MKS_PRINTER) && ENABLED(DUAL_EXTRUDER_SINGLE_HOTEND)) || (ENABLED(MKS_PRINTER) && ENABLED(DUAL_HOTEND_DUAL_NOZZLES))
   #define EXTRUDERS 2
 #else
   #define EXTRUDERS 1
@@ -1830,6 +2076,8 @@
 #if DISABLED(TH3DINHOUSEMACHINE)
   #if ENABLED(V6_HOTEND)
     #define TEMP_SENSOR_0 5
+  #elif ENABLED(KNOWN_HOTEND_THERMISTOR)
+    #define TEMP_SENSOR_0 KNOWN_HOTEND_THERMISTOR_VALUE
   #elif ENABLED(TH3D_HOTEND_THERMISTOR) || ENABLED(TH3D_EZ300)
     #define TEMP_SENSOR_0 1
   #elif ENABLED(WANHAO_D6)
@@ -1846,6 +2094,8 @@
 #if ENABLED(DUAL_HOTEND_DUAL_NOZZLES)
   #if ENABLED(V6_HOTEND)
     #define TEMP_SENSOR_1 5
+  #elif ENABLED(KNOWN_HOTEND_THERMISTOR)
+    #define TEMP_SENSOR_1 KNOWN_HOTEND_THERMISTOR_VALUE
   #else
     #define TEMP_SENSOR_1 1
   #endif
@@ -1859,6 +2109,8 @@
 #if DISABLED(TH3DINHOUSEMACHINE)
   #if ENABLED(AC_BED) || ENABLED(WANHAO_I3MINI)
     #define TEMP_SENSOR_BED 0
+  #elif ENABLED(KNOWN_BED_THERMISTOR)
+    #define TEMP_SENSOR_BED KNOWN_BED_THERMISTOR_VALUE
   #elif ENABLED(TH3D_BED_THERMISTOR) || ENABLED(ALFAWISE_U10) || ENABLED(FT5) || ENABLED(TH3D_EZ300)
     #define TEMP_SENSOR_BED 1
   #elif ENABLED(TAZ5)
@@ -1960,7 +2212,7 @@
     #define  DEFAULT_bedKp 690.34
     #define  DEFAULT_bedKi 111.47
     #define  DEFAULT_bedKd 1068.83
-  #endif	
+  #endif  
 #endif
 
 #if DISABLED(NO_COLD_PREVENT)
@@ -1979,8 +2231,12 @@
   #define USE_YMIN_PLUG
   #define USE_ZMIN_PLUG
   #define USE_XMAX_PLUG
-#elif ENABLED(ENDER5)
+#elif ENABLED(ENDER5) || ENABLED(ENDER5_DUALBOARD)
   #define USE_XMAX_PLUG
+  #define USE_YMAX_PLUG
+  #define USE_ZMIN_PLUG
+#elif ENABLED(COPYMASTER3D_300)
+  #define USE_XMIN_PLUG
   #define USE_YMAX_PLUG
   #define USE_ZMIN_PLUG
 #else
@@ -2000,9 +2256,9 @@
 #endif
 
 #if DISABLED(EZABL_FASTPROBE)
-	#define HOMING_FEEDRATE_Z  (4*60)
+  #define HOMING_FEEDRATE_Z  (4*60)
 #else
-	#define HOMING_FEEDRATE_Z  (8*60)
+  #define HOMING_FEEDRATE_Z  (8*60)
 #endif
   
 #if ENABLED(EZABL_ENABLE)
@@ -2014,7 +2270,11 @@
   #if ENABLED(PROBING_MOTORS_OFF)
     #define XY_PROBE_SPEED 8000
   #else
-    #define XY_PROBE_SPEED 12000
+    #if ENABLED(SLOWER_PROBE_MOVES) || ENABLED(TH3D_EZ300)
+      #define XY_PROBE_SPEED 8000
+    #else
+      #define XY_PROBE_SPEED 12000
+    #endif
   #endif
   #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
   #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)  
@@ -2048,6 +2308,18 @@
   #if ENABLED(EZABL_OUTSIDE_GRID_COMPENSATION)
     #define EXTRAPOLATE_BEYOND_GRID
   #endif
+  #if ENABLED(FIX_MOUNTED_PROBE)
+    #undef Z_MIN_PROBE_ENDSTOP_INVERTING
+    #define Z_MIN_PROBE_ENDSTOP_INVERTING true
+    #undef Z_MIN_ENDSTOP_INVERTING
+    #define Z_MIN_ENDSTOP_INVERTING true
+  #endif
+  #if ENABLED(BLTOUCH)
+    #undef Z_MIN_PROBE_ENDSTOP_INVERTING
+    #define Z_MIN_PROBE_ENDSTOP_INVERTING false
+    #undef Z_MIN_ENDSTOP_INVERTING
+    #define Z_MIN_ENDSTOP_INVERTING false
+  #endif
 #endif
 
 #if DISABLED(S_CURVE_ACCELERATION_DISABLE)
@@ -2068,7 +2340,7 @@
 #define DISABLE_E false
 #define DISABLE_INACTIVE_EXTRUDER true
 
-#if DISABLED(TITAN_EXTRUDER) && DISABLED(CR10SDUALEBOARD)
+#if DISABLED(DUAL_EXTRUDERS)
   #define INVERT_E1_DIR false
 #endif
 #define INVERT_E2_DIR false
@@ -2079,8 +2351,12 @@
   #define X_HOME_DIR 1
   #define Y_HOME_DIR -1
   #define Z_HOME_DIR -1
-#elif ENABLED(ENDER5)
+#elif ENABLED(ENDER5) || ENABLED(ENDER5_DUALBOARD)
   #define X_HOME_DIR 1
+  #define Y_HOME_DIR 1
+  #define Z_HOME_DIR -1
+#elif ENABLED(COPYMASTER3D_300)
+  #define X_HOME_DIR -1
   #define Y_HOME_DIR 1
   #define Z_HOME_DIR -1
 #else
@@ -2109,7 +2385,7 @@
   #define MAX_SOFTWARE_ENDSTOP_Z
 #endif
 
-#if ENABLED(EZOUT_ENABLE) || ENABLED(EZOUTV2_ENABLE) || (ENABLED(CR10S) && DISABLED(CR10S_NOFILAMENTSENSOR)) || (ENABLED(CR10S_MINI) && DISABLED(CR10S_NOFILAMENTSENSOR))  || (ENABLED(CR10S_S4) && DISABLED(CR10S_NOFILAMENTSENSOR)) || (ENABLED(CR10S_S5) && DISABLED(CR10S_NOFILAMENTSENSOR)) || ENABLED(ALFAWISE_U10) || ENABLED(ADIM_GANTRY_I3_PLUS) || ENABLED(ENDER4_FIL)
+#if ENABLED(EZOUT_ENABLE) || ENABLED(EZOUTV2_ENABLE) || (ENABLED(CR10S) && DISABLED(CR10S_NOFILAMENTSENSOR)) || (ENABLED(CR10S_MINI) && DISABLED(CR10S_NOFILAMENTSENSOR))  || (ENABLED(CR10S_S4) && DISABLED(CR10S_NOFILAMENTSENSOR)) || (ENABLED(CR10S_S5) && DISABLED(CR10S_NOFILAMENTSENSOR)) || ENABLED(ALFAWISE_U10) || ENABLED(ADIM_GANTRY_I3_PLUS) || ENABLED(ENDER4_FIL) || ENABLED(COPYMASTER3D_300)
   #define FILAMENT_RUNOUT_SENSOR
   #if ENABLED(FILAMENT_RUNOUT_SENSOR)
     #if ENABLED(EZOUT_ENABLE) || ENABLED(EZOUTV2_ENABLE) || ENABLED(ADIM_GANTRY_I3_PLUS)
@@ -2117,10 +2393,10 @@
     #else
       #define FIL_RUNOUT_INVERTING true
     #endif
-    #if DISABLED(TIM_AM8)
-      #define NUM_RUNOUT_SENSORS   1
+    #if ENABLED(TIM_AM8) || ENABLED(EZOUTV2_DUAL_ENABLE)
+        #define NUM_RUNOUT_SENSORS   2
     #else
-      #define NUM_RUNOUT_SENSORS   2
+      #define NUM_RUNOUT_SENSORS   1
     #endif
     #define FIL_RUNOUT_PULLUP
     #define FILAMENT_RUNOUT_SCRIPT "M600"
@@ -2187,6 +2463,10 @@
   #define LEVEL_BED_CORNERS
   #define LEVEL_CORNERS_INSET 30
   #define LEVEL_CENTER_TOO
+#endif
+
+#if ENABLED(BLTOUCH) && ENABLED(SLIM_1284P)
+  #define SPEAKER_KILL
 #endif
 
 #if DISABLED(SPEAKER_KILL)

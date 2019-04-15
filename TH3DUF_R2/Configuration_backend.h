@@ -1268,7 +1268,9 @@
 
 //CR-10 and Ender 3 Model Settings
 #if ENABLED(CR10) || ENABLED(CR10_MINI) || ENABLED(CR10_S4) || ENABLED(CR10_S5) || ENABLED(ENDER3) || ENABLED(ENDER5)
-  #define SLIM_1284P
+  #if DISABLED(HF_ENDER3)
+    #define SLIM_1284P
+  #endif
   #define BAUDRATE 115200
 
   #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
@@ -1333,6 +1335,15 @@
     
   #ifndef MOTHERBOARD
     #define MOTHERBOARD BOARD_MELZI_CREALITY
+  #endif
+
+
+  #if ENABLED(HF_ENDER3)
+    #define INVERT_X_DIR false
+    #define INVERT_Y_DIR false
+    #define INVERT_Z_DIR true
+    #define INVERT_E0_DIR false
+    #define MOTHERBOARD BOARD_MKS_GEN_L
   #endif
 
   #if ENABLED(CR10)

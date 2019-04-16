@@ -290,15 +290,15 @@
 //===========================================================================
 // Creality Ender 3 Options - Select 'Sanguino 1284p' from Tools > Board
 //===========================================================================
-#define ENDER3
-#define HF_ENDER3
+//#define ENDER3
+//#define HF_ENDER3
 // If you are using our EZOut V1/V2 (connected to LCD header) filament sensor kit please follow the install guide
 // and then uncomment the #define EZOUT_ENABLE line below.
 // Do NOT ever connect our filament sensor without the supplied adapter board.
 //#define EZOUT_ENABLE
 
 // EZABL Probe Mounts (Ender 3 uses the same mounts as CR-10)
-#define CR10_OEM
+//#define CR10_OEM
 //#define CR10_VOLCANO
 //#define CR10_V6HEAVYDUTY
 //#define TM3DAERO
@@ -544,12 +544,13 @@
 // ********** TH3D MKS Gen L Documentation Coming end of April 2019 *********
 //===========================================================================
 
-//#define MKS_PRINTER
+#define MKS_PRINTER
+#define CR10_OEM
 
 // Build Area Size Settings
-#define MKS_X_SIZE 300
-#define MKS_Y_SIZE 300
-#define MKS_Z_SIZE 300
+#define MKS_X_SIZE 235
+#define MKS_Y_SIZE 235
+#define MKS_Z_SIZE 235
 
 // Endstop Logic Settings
 #define MKS_X_ENDSTOP 0
@@ -566,7 +567,7 @@
 // Motor Direction Settings
 #define MKS_X_DIRECTION 0
 #define MKS_Y_DIRECTION 0
-#define MKS_Z_DIRECTION 0
+#define MKS_Z_DIRECTION 1
 #define MKS_E0_DIRECTION 0
 #define MKS_E1_DIRECTION 0
 
@@ -599,7 +600,7 @@
 
 // While recommend the 12864 LCD we carry as it has a SD slot you can use a CR-10/Ender 3/Ender 5 LCD connected to EXP1 (rotate 180 degrees instead of aligning the pin)
 // Uncomment the below line to use the single cable Creality (Melzi) LCD instead of a standard 12864 LCD
-//#define CR10_STOCKDISPLAY
+#define CR10_STOCKDISPLAY
 
 // If your lcd knob moves the wrong direction uncomment the below line to reverse it
 //#define MKS_KNOB_REVERSE

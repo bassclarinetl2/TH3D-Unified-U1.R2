@@ -149,18 +149,6 @@
 //#define CUSTOM_PROBE
 
 //===========================================================================
-// ***********************   COPYMASTER PRINTERS    *************************
-//===========================================================================
-
-//===========================================================================
-// Copymaster 3D 300 Options - Select 'Arduino Mega 2560' from Tools > Board
-//===========================================================================
-//#define COPYMASTER3D_300
-
-// EZABL Probe Mounts
-//#define CUSTOM_PROBE
-
-//===========================================================================
 // *************************   CREALITY PRINTERS    *************************
 //===========================================================================
 
@@ -292,6 +280,7 @@
 //===========================================================================
 #define ENDER3
 #define HF_ENDER3
+
 // If you are using our EZOut V1/V2 (connected to LCD header) filament sensor kit please follow the install guide
 // and then uncomment the #define EZOUT_ENABLE line below.
 // Do NOT ever connect our filament sensor without the supplied adapter board.
@@ -544,12 +533,17 @@
 // ********** TH3D MKS Gen L Documentation Coming end of April 2019 *********
 //===========================================================================
 
-//#define MKS_PRINTER
+#define MKS_PRINTER
+
+#define RGB_LED_R_PIN 2
+#define RGB_LED_G_PIN 15
+#define RGB_LED_B_PIN 19
+#define RGB_LED
 
 // Build Area Size Settings
-#define MKS_X_SIZE 300
-#define MKS_Y_SIZE 300
-#define MKS_Z_SIZE 300
+#define MKS_X_SIZE 220
+#define MKS_Y_SIZE 220
+#define MKS_Z_SIZE 250
 
 // Endstop Logic Settings
 #define MKS_X_ENDSTOP 0
@@ -566,7 +560,7 @@
 // Motor Direction Settings
 #define MKS_X_DIRECTION 0
 #define MKS_Y_DIRECTION 0
-#define MKS_Z_DIRECTION 0
+#define MKS_Z_DIRECTION 1
 #define MKS_E0_DIRECTION 0
 #define MKS_E1_DIRECTION 0
 
@@ -739,7 +733,7 @@
 //#define FAN_FIX
 
 // Use your own printer name
-#define USER_PRINTER_NAME "HF Ender 3 Pro" 
+//#define USER_PRINTER_NAME "CHANGE ME" 
 
 // If your printer is homing to the endstops hard uncomment this to change the homing speed/divisor to make it less aggressive.
 //#define SLOWER_HOMING
@@ -830,6 +824,6 @@
 
 #include "Configuration_backend.h"
 
-#define UNIFIED_VERSION "TH3D U1.R2.11"
+#define UNIFIED_VERSION "TH3D U1.R2.10c"
 
 #endif // CONFIGURATION_H
